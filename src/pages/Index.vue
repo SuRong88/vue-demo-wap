@@ -1,12 +1,14 @@
 <template>
-	<div id="app">
-		<router-view />
-	</div>
+  <div class="index">
+  </div>
 </template>
+
 <script>
 export default {
+	components: {},
 	created() {},
 	mounted() {},
+	props: {},
 	data() {
 		return {};
 	},

@@ -1,12 +1,14 @@
 <template>
-	<div id="app">
-		<router-view />
-	</div>
+	<div class="header">header</div>
 </template>
+
 <script>
 export default {
+	name: 'vHeader',
+	components: {},
 	created() {},
 	mounted() {},
+	props: {},
 	data() {
 		return {};
 	},
