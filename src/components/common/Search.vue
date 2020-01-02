@@ -1,17 +1,13 @@
 <template>
-    <div class="header">
-        header
-    </div>
+    <div class="search">search</div>
 </template>
 
 <script>
-import Bus from '@/bus/event.js';
 export default {
-    name: 'vHeader',
+    name: 'vSearch',
     components: {},
     created() {},
     mounted() {},
-    props: {},
     data() {
         return {};
     },

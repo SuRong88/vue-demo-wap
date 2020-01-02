@@ -1,11 +1,12 @@
 module.exports = {
-	chainWebpack: config => {
+	//配置base64转换limit
+        chainWebpack: config => {
 		config.module
 			.rule('images')
 			.use('url-loader')
 			.loader('url-loader')
 			.tap(options => Object.assign(options, {
-				limit: 10000
+				limit: 1
 			}))
 	},
 	configureWebpack: {
@@ -43,11 +44,10 @@ module.exports = {
 	// 	loaderOptions: {
 	// 		postcss: {
 	// 			plugins: [
-	// 				require('postcss-px2rem')({
-	// 					rootValue: 20, // 换算的基数
+	// 				require('postcss-pxtorem')({
+	// 					rootValue: 16, // 换算的基数
 	// 					selectorBlackList: [], // 忽略转换正则匹配项
 	// 					propList: ['*'],
-	// 					minPixelValue: 2
 	// 				}),
 	// 			]
 	// 		}

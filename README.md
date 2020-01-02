@@ -1,5 +1,4 @@
-# demo-wap
-
+# demo-pc
 ## Project setup
 ```
 npm install
@@ -23,6 +22,11 @@ npm run test
 ### Lints and fixes files
 ```
 npm run lint
+```
+
+### Run your unit tests
+```
+npm run test:unit
 ```
 
 ### Customize configuration

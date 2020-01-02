@@ -1,21 +1,25 @@
 <template>
-  <div class="index">
-  </div>
+    <div class="index">
+        index
+    </div>
 </template>
 
 <script>
 export default {
-	components: {},
-	created() {},
-	mounted() {},
-	props: {},
-	data() {
-		return {};
-	},
-	computed: {},
-	watch: {},
-	methods: {}
+    created() {},
+    mounted() {},
+    data() {
+        return {};
+    },
+    computed: {},
+    watch: {},
+    methods: {}
 };
 </script>
 
-<style></style>
+<style>
+.test-input{
+    width: 10rem;
+    height: 5rem;
+}
+</style>

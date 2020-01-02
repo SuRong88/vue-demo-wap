@@ -1,140 +1,119 @@
-import Vue from 'vue'
-import moment from 'moment' // 处理日期
-import md5 from 'md5' // md5密码
+import md5 from 'md5'; // 若需要md5密码
+import moment from 'moment'; // 若需要处理日期
+import { Toast, Indicator, MessageBox } from 'mint-ui';
 export default {
-	install: function(Vue) {
-		let loading = null;
-		// 消息提示
-		Vue.prototype.infoToast = function(msg, duration = 3000) {
-				if (msg) {
-					this.$message({
-						message: msg,
-						type: 'info',
-						duration: duration,
-						// 是否可关闭
-						showClose: false,
-						// 提示：自定义提示框样式需要配合el-message__content设置文字颜色 
-						// .el-message__closeBtn 设置关闭按钮的样式color
-						// 自定义图标的类名，会覆盖 type
-						iconClass: 'icon',
-						// 自定义类名(提示框的背景颜色)	
-						customClass: 'info',
-						// 文字居中
-						center: true,
-						// 关闭执行函数
-						onClose: function() {},
-						// 距离顶部（默认20）
-						offset: 30
-					});
-				}
-			},
-			// 警告提示
-			Vue.prototype.warnToast = function(msg, duration = 3000) {
-				if (msg) {
-					this.$message({
-						message: msg,
-						type: 'warning',
-						duration: duration,
-						showClose: false,
-						customClass: 'warning',
-						iconClass: 'none',
-						offset: 550
-					});
-					// 等同于上面
-					// this.$message.waring('警告提示')
-				}
-			},
-			// 错误提示
-			Vue.prototype.errorToast = function(msg, duration = 3000) {
-				if (msg) {
-					this.$message({
-						message: msg,
-						type: 'error',
-						duration: duration,
-						showClose: true
-					});
-				}
-			},
-			// 成功提示
-			Vue.prototype.successToast = function(msg, duration = 3000) {
-				if (msg) {
-					this.$message({
-						message: msg,
-						type: 'success',
-						duration: duration,
-						showClose: true
-					});
-				}
-			},
-			// 加载
-			// 显示loading
-			Vue.prototype.loading = function(type, text = '加载中...') {
-				loading = this.$loading({
-					// 禁止屏幕滚动
-					lock: true,
-					// 加载文字
-					text: text,
-					// 加载背景
-					background: 'rgba(255,255,255,0.7)',
-					// 加载图标
-					spinner: "el-icon-loading",
-					// 基本无用
-					// fullscreen:false,
-					// target:document.querySelector('.index')
-				});
-			},
-			// 隐藏loading
-			Vue.prototype.loadEnd = function(type) {
-				loading.close();
-			},
-			// 弹窗
-			// 注意：原弹窗按钮样式是左取消右确定，但项目UI需要左确定右取消，所以取消与确定的文本和事件对换
-			Vue.prototype.wDialog = function(title, content, cancelButtonText, confirmButtonText, showConfirmButton, cb_ok,
-				cb_err) {
-				this.$confirm(content, title, {
-					cancelButtonText: cancelButtonText || '确定',
-					confirmButtonText: confirmButtonText || '取消',
-					showConfirmButton: showConfirmButton,
-					dangerouslyUseHTMLString: true,
-					center: true,
-					customClass: 'myDialogBox',
-					distinguishCancelAndClose: true,
-					beforeClose: function(action, instance, done) {
-						if (action == 'confirm') {
-							done();
-						} else if (action == 'close') {
-							done();
-						} else {
-							cb_ok && cb_ok(done);
-						}
-					}
-				}).then(function() {
-					cb_err && cb_err();
-				}).catch(function() {
-
-				})
-			},
-			// 指定滚动条位置
-			Vue.prototype.wSetScroll = function(top) {
-				if (document.documentElement.scrollTop || document.documentElement.scrollTop == 0) {
-					document.documentElement.scrollTop = top;
-				} else if (window.pageYOffset || window.pageYOffset == 0) {
-					window.pageYOffset = top;
-				} else if (document.body.scrollTop || document.body.scrollTop == 0) {
-					document.body.scrollTop = top;
-				}
-			},
-			// 返顶
-			Vue.prototype.wToTop = function() {
-				this.wSetScroll(0);
-			},
-			// md5加密
-			Vue.prototype.md5 = function(text) {
-				return md5(text)
-			},
-			// 日期格式化
-			Vue.prototype.format = function(time, type) {
-				return moment(time).format(type)
-			}
-	}
-}
+    install: function(Vue) {
+        // 错误提示
+        Vue.prototype.errorToast = function(msg, duration = 2000) {
+            if (msg) {
+                Toast({
+                    message: msg,
+                    duration: duration
+                });
+            }
+        };
+        // 成功提示
+        Vue.prototype.successToast = function(msg, duration = 2000) {
+            if (msg) {
+                Toast({
+                    message: msg,
+                    duration: duration
+                });
+            }
+        };
+        // 弹窗
+        Vue.prototype.wDialog = function(title, msg, showCancel, cancelText, confirmText, cb_yes, cb_no) {
+            MessageBox({
+                title: title,
+                message: msg,
+                showCancelButton: showCancel,
+                cancelButtonText: cancelText,
+                confirmButtonText: confirmText,
+                closeOnClickModal: false
+            }).then(function(Promise) {
+                if (Promise == 'confirm') {
+                    cb_yes && cb_yes();
+                } else {
+                    cb_no && cb_no();
+                }
+            });
+        };
+        // 显示loading
+        Vue.prototype.loading = function(text = '') {
+            Indicator.open({
+                text: text,
+                spinnerType: 'fading-circle'
+            });
+        };
+        // 隐藏loading
+        Vue.prototype.loadEnd = function() {
+            Indicator.close();
+        };
+        // input失去焦点(垂直滚动1px的距离然后再滚回来回来的位置)
+        Vue.prototype.wInputBlur = function() {
+            let currentPosition = '';
+            let distance = 1;
+            setTimeout(function() {
+                currentPosition = document.documentElement.scrollTop || document.body.scrollTop;
+                currentPosition -= distance;
+                window.scrollTo(0, currentPosition);
+                currentPosition += distance;
+                window.scrollTo(0, currentPosition);
+            }, 100);
+        };
+        // 在mounted生命周期中调用，专门在不会新增输入框的页面使用
+        Vue.prototype.inputBlur = function() {
+            for (var i = 0; i < document.getElementsByTagName('input').length; i++) {
+                document.getElementsByTagName('input')[i].addEventListener('blur', this.wInputBlur);
+            }
+            for (var i = 0; i < document.getElementsByTagName('textarea').length; i++) {
+                document.getElementsByTagName('textarea')[i].addEventListener('blur', this.wInputBlur);
+            }
+        };
+        // 指定滚动条位置
+        Vue.prototype.wSetScroll = function(left, top) {
+            window.scrollTo(left, top);
+        };
+        // 修改title
+        Vue.prototype.changeTitle = function(text) {
+            // 判断浏览器
+            let userAgent = navigator.userAgent.toLowerCase();
+            if (userAgent.indexOf('alipay') > 0) {
+                ap.setNavigationBar({
+                    title: text,
+                    reset: true
+                });
+            } else {
+                document.title = text;
+            }
+        };
+        // 关闭页面
+        Vue.prototype.closeWin = function() {
+            // 判断浏览器
+            let userAgent = navigator.userAgent.toLowerCase();
+            if (userAgent.indexOf('alipay') > 0) {
+                AlipayJSBridge.call('closeWebview');
+                return false;
+            }
+            if (Vue.prototype.isWeixin()) {
+                WeixinJSBridge.call('closeWindow');
+                return false;
+            }
+            window.close();
+        };
+        // 判断是否微信浏览器
+        Vue.prototype.isWeixin = function() {
+            let ua = navigator.userAgent.toLowerCase();
+            let res = ua.indexOf('micromessenger') != -1;
+            return res;
+        };
+        // md5加密
+        Vue.prototype.md5 = function(text) {
+            return md5(text);
+        };
+        // 日期格式化
+        Vue.prototype.format = function(time, type) {
+            return moment(time).format(type);
+        };
+    }
+};
