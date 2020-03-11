@@ -1,5 +1,5 @@
 <template>
-    <div class="test">
+    <div class="test-page">
         <div class="box" ref="scrollBox" id="scrollBox">
             <div class="con-w">
                 <ul class="con">

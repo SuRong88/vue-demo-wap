@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import Bus from '@/bus/event.js';
 export default {
     name: 'vFooter',
     components: {},

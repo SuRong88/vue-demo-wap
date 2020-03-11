@@ -1,5 +1,5 @@
 <template>
-    <div class="demo"><v-mask :layerData="layerData" @close="closeHandle" @cancel="cancelHandle" @confirm="confirmHandle">内容区</v-mask></div>
+    <div class="demo-page"><v-mask :layerData="layerData" @close="closeHandle" @cancel="cancelHandle" @confirm="confirmHandle">内容区</v-mask></div>
 </template>
 
 <script>
