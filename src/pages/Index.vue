@@ -16,8 +16,4 @@ export default {
 </script>
 
 <style>
-.test-input {
-  width: 10rem;
-  height: 5rem;
-}
 </style>

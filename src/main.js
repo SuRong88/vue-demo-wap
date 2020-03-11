@@ -20,15 +20,13 @@ Vue.use(Mint);
 Vue.use(formCheck);
 Vue.use(layout);
 Vue.use(errorCode);
+Vue.use(formatDate);
 
 import 'mint-ui/lib/style.min.css';
 import 'swiper/dist/css/swiper.css';
 import "css/reset.css";
 import "css/base.less";
 import "css/layout.less";
-
-// 日期格式化 <td>{{ item.create_time | formatDate('yyyy-MM-dd') }}</td>
-Vue.filter('formatDate', formatDate);
 
 //vue原型链挂载总线
 Vue.prototype.$Bus = new Vue();
