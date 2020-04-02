@@ -5,9 +5,7 @@
 <script>
 export default {
     components: {
-        vMask(resolve) {
-            return require(['@/components/mask/mask.vue'], resolve);
-        }
+        vMask: resolve => require(['@/components/mask/mask.vue'], resolve)
     },
     created() {
         let query = JSON.parse(JSON.stringify(this.$route.query));
@@ -16,7 +14,19 @@ export default {
     },
     mounted() {},
     data() {
-        return {};
+        return {
+            // 图形码模态框
+            layerData: {
+                isLayer: true, // 弹窗是否渲染
+                isHeader: true, // 头部是否渲染
+                isBtn: true, // 按钮是否渲染
+                title: '弹窗标题', // 标题内容
+                confirmText: '确定', // 确定按钮文本
+                cancelText: '取消', // 取消按钮文本
+                isCancel: true, // 是否需要取消按钮
+                isClose: true // 是否需要关闭按钮
+            }
+        };
     },
     computed: {},
     watch: {

@@ -11,6 +11,7 @@ import formCheck from 'utils/formCheck';
 import layout from 'utils/layout';
 import errorCode from 'utils/errorCode';
 import formatDate from 'utils/formatDate';
+import directive from 'utils/directive';
 
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import Mint from 'mint-ui';
@@ -21,6 +22,7 @@ Vue.use(formCheck);
 Vue.use(layout);
 Vue.use(errorCode);
 Vue.use(formatDate);
+Vue.use(directive);
 
 import 'mint-ui/lib/style.min.css';
 import 'swiper/dist/css/swiper.css';

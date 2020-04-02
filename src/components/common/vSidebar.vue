@@ -1,10 +1,10 @@
 <template>
-    <div class="footer">footer</div>
+    <div class="v-sidebar">sidebar</div>
 </template>
 
 <script>
 export default {
-    name: 'vFooter',
+    name: 'vSidebar',
     components: {},
     created() {},
     mounted() {},

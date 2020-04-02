@@ -1,13 +1,16 @@
 <template>
-    <div class="search">search</div>
+    <div class="v-header">
+        header
+    </div>
 </template>
 
 <script>
 export default {
-    name: 'vSearch',
+    name: 'vHeader',
     components: {},
     created() {},
     mounted() {},
+    props: {},
     data() {
         return {};
     },

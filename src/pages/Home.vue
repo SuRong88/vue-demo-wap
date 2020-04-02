@@ -7,12 +7,10 @@
 </template>
 
 <script>
-import vHeader from 'components/common/Header.vue';
-import vFooter from 'components/common/Footer.vue';
 export default {
     components: {
-        vHeader:resolve => require(['components/common/Header.vue'],resolve),
-        vFooter:resolve => require(['components/common/Footer.vue'],resolve)
+        vHeader:resolve => require(['components/common/vHeader.vue'],resolve),
+        vFooter:resolve => require(['components/common/vFooter.vue'],resolve)
     },
     created() {},
     mounted() {},

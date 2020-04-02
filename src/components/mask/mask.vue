@@ -2,7 +2,7 @@
     <transition name="layer-trans">
         <section class="layer-box" @click="closeLayer" v-if="layerData.isLayer">
             <div class="layer-sbox">
-                <div class="layer" @click="layerPrevent">
+                <div class="layer" @click.stop="">
                     <!-- 标题 -->
                     <header class="layer-header" v-if="layerData.isHeader">
                         <h3 class="layer-title">{{ layerData.title }}</h3>
@@ -104,47 +104,46 @@ export default {
 }
 .layer {
     background-color: #fff;
-    -ms-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -o-border-radius: 4px;
-    border-radius: 4px;
+    -moz-border-radius: 0.4rem;
+    -webkit-border-radius: 0.4rem;
+    -o-border-radius: 0.4rem;
+    border-radius: 0.4rem;
     display: inline-block;
     position: relative;
-    min-width: 500px;
-    padding: 40px 0 60px 0;
+    width: 92%;
+    padding: 4rem 0 6rem 0;
 }
 
 .layer-header {
     /*border-bottom: 1px solid #eee;*/
     /*padding: .6rem 0;*/
-    margin-bottom: 30px;
+    margin-bottom: 3rem;
 }
 
 .layer-header .layer-title {
     color: #333;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: normal;
-    line-height: 20px;
+    line-height: 2rem;
 }
 
 .layer-content {
-    font-size: 14px;
-    line-height: 22px;
+    font-size: 1.4rem;
+    line-height: 2.2rem;
     color: #333;
-    padding: 20px 50px;
+    padding: 2rem 5rem;
     max-height: 70vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .layer-content::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    width: 0.5rem;
+    height: 0.5rem;
 }
 .layer-content::-webkit-scrollbar-thumb {
     /*滚动条里面小方块*/
-    border-radius: 5px;
-    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.7);
+    border-radius: 0.5rem;
+    -webkit-box-shadow: inset 0 0 0.5rem rgba(0, 0, 0, 0.7);
     background: rgba(0, 0, 0, 0.5);
 }
 
@@ -152,21 +151,21 @@ export default {
     /*border-top: 1px solid #d2d3d5;*/
     font-size: 0;
     overflow: hidden;
-    margin-top: 30px;
+    margin-top: 3rem;
 }
 
 .layer-btnbox a {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    border-radius: 2px;
+    border-radius: 0.2rem;
     /*float: left;*/
     /*color: #fff;*/
     display: inline-block;
-    font-size: 14px;
-    line-height: 40px;
+    font-size: 1.4rem;
+    line-height: 4rem;
     text-align: center;
-    width: 130px;
+    width: 35%;
 }
 
 .layer-confirm {
@@ -178,21 +177,17 @@ export default {
     background-color: #f9f9f9;
     border: 1px solid #e3e3e3;
     color: #333;
-    margin-left: 20px;
-    &:hover {
-        // color: #FF6600;
-    }
+    margin-left: 5%;
 }
 
-/*.layer-confirm.on{width: 100%;}*/
 .layer-close {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 30px;
+    top: 1rem;
+    right: 1rem;
+    width: 3rem;
 }
 
 .layer-close .layer-close-icon {
-    height: 30px;
+    height: 3rem;
 }
 </style>
